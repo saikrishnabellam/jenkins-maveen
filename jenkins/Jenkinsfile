@@ -1,11 +1,11 @@
 pipeline {
     agent {
-    error 'not cleand'
         docker {
             image 'maven:3-alpine'
             args '-v /root/.m2:/root/.m2'
         }
     }
+env error 'not cleand'
     stages {
         stage('Build') {
             steps {
