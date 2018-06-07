@@ -15,9 +15,7 @@ pipeline {
                 image: plugins/docker
                 username: saikrishnabellam
                 password: Saikrishna1
-                repo: saikrishnabellam/dockerbuild
-                tags: [ 1.0.0, 1.0, latest ]
-              }
+                repo: saikrishnabellam/dockerbuild              
             }
 
         }
