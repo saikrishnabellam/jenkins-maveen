@@ -8,14 +8,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
-            }
-            post {
-                always {publish:
-                image: plugins/docker
-                username: saikrishnabellam
-                password: Saikrishna1
-                repo: saikrishnabellam/dockerbuild              
+                sh 'mvn -B -DskipTests clean package'            
             }
 
         }
