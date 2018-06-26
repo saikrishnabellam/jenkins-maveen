@@ -27,5 +27,6 @@ pipeline {
                 sh './jenkins/scripts/deliver.sh'
             }
         }
+         emailext body: 'logs', recipientProviders: [developers()], subject: 'logs', to: 'saebellam@gmail.com'
     }
 }
