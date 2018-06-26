@@ -1,5 +1,4 @@
 pipeline {
-    emailext body: 'logs', recipientProviders: [developers()], subject: 'logs', to: 'saebellam@gmail.com'
     agent {
         docker {
             image 'maven:3-alpine'
@@ -17,11 +16,13 @@ pipeline {
             steps {
                 sh 'mvn test'
             }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
+             currentBuild.result = 'SUCCESS'
+    } catch (any) {
+        currentBuild.result = 'FAILURE'
+        throw any //rethrow exception to prevent the build from proceeding
+    } finally {
+        step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: 'saebellam@gmail.com', sendToIndividuals: true])
+    }
         }
         stage('Deliver') {
             steps {
